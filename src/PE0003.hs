@@ -12,6 +12,7 @@ module PE0003
 
 -- For testing purposes
 , firstPrimes
+, genIncrements
 , potentials
 , divisibleBy
 , nextPrime
@@ -34,28 +35,40 @@ solution = last . primeFactors $ 600851475143
 
 -- Functions
 
--- | These increments avoid testing for multiples of 2, 3 and 5.
--- 1 + 6 = 7 + 4 = 11 + 2 = 13 + 4 = 17 + 2 = 19 + 4 = 23 + 6 = 29 + 2 = 31...
---     ↑       ↑        ↑        ↑        ↑        ↑        ↑        ↑
-increments :: Num a => [a]
-increments = cycle [ 6, 4, 2, 4, 2, 4, 6, 2 ]
-
--- | Numbers which are not multiples of 2, 3 and 5.
-potentials :: Num a => [a]
-potentials = tail $ scanl (+) 1 increments
-
--- | First prime numbers are 2, 3 and 5.
+-- | First prime numbers are 2, 3, 5, 7, 11, 13 and 17.
 firstPrimes :: Integral a => [a]
-firstPrimes = [ 2, 3, 5 ]
+firstPrimes = [ 2, 3, 5, 7, 11, 13, 17 ]
+
+minus :: Integral a => [a] -> [a] -> [a]
+minus [] _ = []
+minus xs [] = xs
+minus (x:xs) (y:ys)
+    | x < y = x : minus xs (y:ys)
+    | x == y = minus xs (y:ys)
+    | otherwise = minus (x:xs) ys
+
+genIncrements :: Integral a => [a] -> [a]
+genIncrements numbers = zipWith (-) (tail remains) remains
+    where
+        maxi = product numbers 
+        multiplesOf x = takeWhile (<= maxi) $ iterate (+ x) x
+        toRemove = multiplesOf <$> numbers
+        remains = foldr (flip minus) [1..maxi + 1] toRemove
+
+-- | Numbers which are not multiples of 2, 3, 5, 7, 11, 13 and 17.
+potentials :: Integral a => [a]
+potentials = tail $ scanl (+) 1 (cycle (genIncrements firstPrimes))
 
 -- | Check if a number is divisible by any divisor from a list of divisors.
+-- Note: the number MUST NOT be found in the divisors list!
 divisibleBy :: Integral a
             => a    -- ^ dividend
             -> [a]  -- ^ divisors
             -> Bool -- ^ True if any divisor can divide the dividend
 divisibleBy _ [] = False
 divisibleBy number divisors =
-    any ((0 ==) . mod number) . takeWhile (< div number 2) $ divisors
+    any ((0 ==) . mod number) . takeWhile (<= isqrt number) $ divisors
+    where isqrt = floor . sqrt . fromIntegral
 
 -- | Given a list of the first n primes, finds the next (n+1) prime number.
 nextPrime :: Integral a

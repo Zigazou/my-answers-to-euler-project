@@ -8,12 +8,9 @@ import PE0003
 
 spec :: Spec
 spec = do
-    describe "potentials" $ do
-        it "first 12 elements are [ 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 ]" $
-            take 12 potentials `shouldBe` [ 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 ]
-
-        it "13th element is 49" $
-            potentials !! 12 `shouldBe` 49
+    describe "genIncrements" $ do
+        it "gives [6,4,2,4,2,4,6,2] for [2,3,5]" $
+            genIncrements [2,3,5] `shouldBe` [6,4,2,4,2,4,6,2]
 
     describe "divisibleBy" $ do
         it "cannot divide with an empty list" $
@@ -24,17 +21,6 @@ spec = do
 
         it "gives True for 35 and [ 2, 3, 5 ]" $
             divisibleBy 35 [ 2, 3, 5 ] `shouldBe` True
-
-    describe "nextPrime" $ do
-        it "gives (7, [11...]) for [2, 3, 5] and potentials" $
-            fst (nextPrime [ 2, 3, 5 ] potentials) `shouldBe` 7
-
-        it "gives (11, [13...]) for [2, 3, 5, 7] and tail potentials" $
-            fst (nextPrime [ 2, 3, 5, 7 ] (tail potentials)) `shouldBe` 11
-
-    describe "nextPrimes" $
-        it "gives [ 7, 11, 13, 17 ] for [2, 3, 5] and potentials" $
-            take 4 (nextPrimes [ 2, 3, 5 ] potentials) `shouldBe` [ 7, 11, 13, 17 ]
 
     describe "primes" $
         it "has first 1000 primes right" $

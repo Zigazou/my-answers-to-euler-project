@@ -1,0 +1,35 @@
+#!/bin/bash
+OUTPUT="$3"
+echo $*
+
+function generate_solutions() {
+echo "module Solutions (solutions) where"
+echo
+    ls -1 src/PE????.hs | while read solution
+    do
+        echo "import $(basename $solution .hs)"
+    done
+
+    echo
+    echo 'runProblem :: Show a => Integer -> String -> a -> IO ()'
+    echo 'runProblem problemID problemTitle solution = do'
+    echo '    putStr (show problemID)'
+    echo '    putStr ") "'
+    echo '    putStr problemTitle'
+    echo '    putStr ": "'
+    echo '    print solution'
+
+    echo
+    echo "solutions :: IO ()"
+    echo "solutions = do"
+
+    ls -1 src/PE????.hs | while read solution
+    do
+        pe=$(basename $solution .hs)
+        echo "    runProblem $pe.problemID $pe.problemTitle $pe.solution"
+    done
+}
+
+cd "$(dirname $(readlink -f $0))"
+
+generate_solutions > "$OUTPUT"

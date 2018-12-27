@@ -40,7 +40,7 @@ solution :: (Integral a, Show a) => Maybe a
 solution = cpProduct <$> biggestPalindrom 3
 
 -- Functions
-data (Integral a, Show a, Ord a, Eq a) => CoupleProduct a = CoupleProduct
+data CoupleProduct a = CoupleProduct
     { cpProduct :: a
     , cpNumberA :: a
     , cpNumberB :: a
