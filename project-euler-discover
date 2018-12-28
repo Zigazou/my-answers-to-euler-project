@@ -3,8 +3,13 @@ OUTPUT="$3"
 echo $*
 
 function generate_solutions() {
-echo "module Solutions (solutions) where"
-echo
+    echo 'module Solutions (solutions) where'
+    echo
+    echo 'import Criterion.Measurement (initializeTime, getTime)'
+    echo 'import Data.Text (pack)'
+    echo 'import Text.Printf (printf)'
+    echo
+
     ls -1 src/PE????.hs | while read solution
     do
         echo "import $(basename $solution .hs)"
@@ -13,16 +18,19 @@ echo
     echo
     echo 'runProblem :: Show a => Integer -> String -> a -> IO ()'
     echo 'runProblem problemID problemTitle solution = do'
+    echo '    start <- getTime'
     echo '    putStr (show problemID)'
     echo '    putStr ") "'
     echo '    putStr problemTitle'
     echo '    putStr ": "'
-    echo '    print solution'
+    echo '    putStr (show solution)'
+    echo '    end <- getTime'
+    echo '    printf " -> %.5f s\n" (end - start)'
 
     echo
-    echo "solutions :: IO ()"
-    echo "solutions = do"
-
+    echo 'solutions :: IO ()'
+    echo 'solutions = do'
+    echo '    initializeTime'
     ls -1 src/PE????.hs | while read solution
     do
         pe=$(basename $solution .hs)
