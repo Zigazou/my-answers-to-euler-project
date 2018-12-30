@@ -1,43 +1,72 @@
 #!/bin/bash
+# This program generates the code to run all the Project Euler problems and
+# calculate individual and total durations.
+#
+# This program is meant to be called from a file named 'src/Solutions.hs'
+# containing this very first line :
+# {-# OPTIONS_GHC -F -pgmF ./project-euler-discover #-}
+#
+# To see which code is generated, you can execute it like this:
+# ./project-euler-discover src/Solutions.hs . /dev/stdout
+
+# GHC waits for this script to output the code in a temporary file specified in
+# the third argument.
+INPUT="$1"
 OUTPUT="$3"
-echo $*
 
-function generate_solutions() {
-    echo 'module Solutions (solutions) where'
-    echo
-    echo 'import Criterion.Measurement (initializeTime, getTime)'
-    echo 'import Data.Text (pack)'
-    echo 'import Text.Printf (printf)'
-    echo
-
-    ls -1 src/PE????.hs | while read solution
+# Outputs a list of all the problems in the src directory.
+function list_problems() {
+    ls -1 src/PE????.hs | while read problem
     do
-        echo "import $(basename $solution .hs)"
-    done
-
-    echo
-    echo 'runProblem :: Show a => Integer -> String -> a -> IO ()'
-    echo 'runProblem problemID problemTitle solution = do'
-    echo '    start <- getTime'
-    echo '    putStr (show problemID)'
-    echo '    putStr ") "'
-    echo '    putStr problemTitle'
-    echo '    putStr ": "'
-    echo '    putStr (show solution)'
-    echo '    end <- getTime'
-    echo '    printf " -> %.5f s\n" (end - start)'
-
-    echo
-    echo 'solutions :: IO ()'
-    echo 'solutions = do'
-    echo '    initializeTime'
-    ls -1 src/PE????.hs | while read solution
-    do
-        pe=$(basename $solution .hs)
-        echo "    runProblem $pe.problemID $pe.problemTitle $pe.solution"
+        echo "$(basename $problem .hs)"
     done
 }
 
+# Import code generation.
+function generate_imports() {
+    # Generates all imports.
+    echo
+    list_problems | sed 's/^/import /'
+}
+
+# Solution code generation.
+function generate_solutions() {
+    # List of all problems and their solutions. Due to Haskell lazyness, they
+    # will be executed only when the result will be displayed.
+    echo 'problems :: [(Integer, String, String)]'
+    echo 'problems ='
+    list_problems \
+        | sed 's/\(.*\)/(\1.problemID, \1.problemTitle, show \1.solution)/' \
+        | sed -e '1 s/^/    [ /' -e '2,10000 s/^/    , /'
+    echo '    ]'
+    echo
+}
+
+function insert_solutions() {
+    # Force read to keep leading and ending whitespaces.
+    local IFS=''
+
+    # Force read to keep backslashes.
+    while read -r line
+    do
+        # Remove the preprocessor directive from the output.
+        [[ "$line" == "{-# OPTIONS_GHC -F -pgmF"* ]] && continue
+
+        # Insert the list of solutions just before the solutions function.
+        [[ "$line" == "solutions :: "* ]] && generate_solutions
+
+        printf "%s\n" "$line"
+
+        # Insert the imports just after the module line.
+        [ "${line/%\ */}" = "module" ] && generate_imports
+    done
+}
+
+# Force this script to run from its directory.
 cd "$(dirname $(readlink -f $0))"
 
-generate_solutions > "$OUTPUT"
+cat "$INPUT" | insert_solutions > "$OUTPUT"
+
+# Return code needs to be forced because insert_solutions ends when there is
+# no more line to read, thus giving a return code of 1
+exit 0
