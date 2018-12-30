@@ -13,10 +13,26 @@
 # the third argument.
 INPUT="$1"
 OUTPUT="$3"
+WHICHONE="$4"
 
 # Outputs a list of all the problems in the src directory.
 function list_problems() {
-    ls -1 src/PE????.hs | while read problem
+    local lsoptions=''
+    local headoptions=''
+
+    case "$WHICHONE" in
+        LAST)
+            lsoptions='-1t'
+            headoptions='-1'
+            ;;
+
+        *)
+            lsoptions='-1'
+            headoptions='-9999'
+            ;;
+        esac
+
+    ls $lsoptions -1 src/PE????.hs | head $headoptions | while read problem
     do
         echo "$(basename $problem .hs)"
     done

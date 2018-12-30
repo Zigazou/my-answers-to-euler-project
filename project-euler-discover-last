@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Force this script to run from its directory.
+cd "$(dirname $(readlink -f $0))"
+
+./project-euler-discover "$1" "$2" "$3" LAST
