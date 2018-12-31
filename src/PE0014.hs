@@ -43,7 +43,7 @@ problemTitle :: String
 problemTitle = "Longest Collatz sequence"
 
 -- | Gives the solution to the current problem.
-solution :: Integral a => a
+solution :: Int
 solution = fst $ maximumBy (comparing snd) (collatzLength [2..999999])
 
 -- Functions
@@ -53,7 +53,7 @@ collatzSequence x = x : collatzSequence (nextCollatzNumber x)
 
 nextCollatzNumber :: Integral a => a -> a
 nextCollatzNumber n
-    | even n = n `div` 2
+    | even n = div n 2
     | otherwise = 3 * n + 1
 
 collatzLength :: Integral a => [a] -> [(a, a)]

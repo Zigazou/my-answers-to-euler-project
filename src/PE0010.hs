@@ -24,7 +24,7 @@ problemTitle :: String
 problemTitle = "Summation of primes"
 
 -- | Gives the solution to the current problem.
-solution :: Integral a => a
+solution :: Int
 solution = sum $ takeWhile (< 2000000) primes
 
 -- Functions
