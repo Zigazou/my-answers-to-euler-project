@@ -26,6 +26,6 @@ problemTitle = "10001st prime"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a
-solution = primes !! 10001
+solution = primes !! 10000
 
 -- Functions
