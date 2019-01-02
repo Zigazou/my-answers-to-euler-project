@@ -83,7 +83,7 @@ primeFactors' (p:ps) number
 
 properDivisors :: Integral a => a -> [a]
 properDivisors = (1:)
-               . init
+               . start
                . uniqueSort
                . fmap product
                . combine
@@ -92,3 +92,6 @@ properDivisors = (1:)
         combine :: Integral a => [a] -> [[a]]
         combine [] = []
         combine (x:xs) = [x] : ([x:ys | ys <- combine xs] ++ combine xs)
+
+        start [] = []
+        start xs = init xs

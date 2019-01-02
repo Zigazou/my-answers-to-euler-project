@@ -20,6 +20,7 @@ properDivisorsTests =
     , (284, [1,2,4,71,142])
     , (2, [1])
     , (19, [1])
+    , (1, [1])
     ]
 
 -- List of first 1000 prime numbers
