@@ -37,7 +37,7 @@ module PE0012
 ) where
 
 import Data.List (find, nub)
-import PE0003 (primes)
+import Helpers (primes)
 
 -- | ID of the Euler problem.
 problemID :: Integer

@@ -1,34 +1,26 @@
-module PE0003Spec (spec) where
+module HelpersSpec (spec) where
 
 import Test.Hspec
 import Test.Hspec.QuickCheck
 import Test.QuickCheck
+import Control.Monad (forM_)
 
-import PE0003
+import Helpers
 
-spec :: Spec
-spec = do
-    describe "genIncrements" $ do
-        it "gives [6,4,2,4,2,4,6,2] for [2,3,5]" $
-            genIncrements [2,3,5] `shouldBe` [6,4,2,4,2,4,6,2]
+divisibleByTests :: [(Int, [Int], Bool)]
+divisibleByTests =
+    [ (123, [], False)
+    , (7, [2,3,5], False)
+    , (35, [2,3,5], True)
+    ]
 
-    describe "divisibleBy" $ do
-        it "cannot divide with an empty list" $
-            divisibleBy 123 [] `shouldBe` False
-
-        it "gives False for 7 and [ 2, 3, 5 ]" $
-            divisibleBy 7 [ 2, 3, 5 ] `shouldBe` False
-
-        it "gives True for 35 and [ 2, 3, 5 ]" $
-            divisibleBy 35 [ 2, 3, 5 ] `shouldBe` True
-
-    describe "primes" $
-        it "has first 1000 primes right" $
-            take 1000 primes `shouldBe` first1000Primes
-
-    describe "primeFactors" $
-        prop "multiplication of prime factors give the same number" $
-            \(Positive n) -> product (primeFactors n) == (n :: Integer)
+properDivisorsTests :: [(Int, [Int])]
+properDivisorsTests =
+    [ (220, [1,2,4,5,10,11,20,22,44,55,110])
+    , (284, [1,2,4,71,142])
+    , (2, [1])
+    , (19, [1])
+    ]
 
 -- List of first 1000 prime numbers
 -- taken from http://mathenjeans.free.fr/amej/glossair/document/nbs_premier/1000_nombres_premiers.html
@@ -135,3 +127,23 @@ first1000Primes =
     , 7727, 7741, 7753, 7757, 7759, 7789, 7793, 7817, 7823, 7829
     , 7841, 7853, 7867, 7873, 7877, 7879, 7883, 7901, 7907, 7919
     ]
+
+spec :: Spec
+spec = do
+    describe "primeIncrements" $
+        it "gives [6,4,2,4,2,4,6,2] for [2,3,5]" $
+            primeIncrements [2,3,5] `shouldBe` [6,4,2,4,2,4,6,2]
+
+    describe "divisibleBy" $
+        forM_ divisibleByTests $ \(number, divisors, result) ->
+            it ("gives " ++ show result ++ " for " ++ show number ++
+                " and " ++ show divisors) $
+                divisibleBy number divisors `shouldBe` result
+
+    describe "primeFactors" $
+        prop "multiplication of prime factors give the same number" $
+            \(Positive n) -> product (primeFactors n) == (n :: Integer)
+
+    describe "primes" $
+        it "has first 1000 primes right" $
+            take 1000 primes `shouldBe` first1000Primes

@@ -13,7 +13,7 @@ module PE0010
 -- For testing purposes
 ) where
 
-import PE0003 (primes)
+import Helpers (primes)
 
 -- | ID of the Euler problem.
 problemID :: Integer

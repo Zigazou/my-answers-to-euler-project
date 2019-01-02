@@ -19,7 +19,7 @@ module PE0005
 
 import Data.List (find, (\\))
 import Data.Maybe (fromMaybe)
-import PE0003 (primes)
+import Helpers (primes)
 
 -- | ID of the Euler problem.
 problemID :: Integer
