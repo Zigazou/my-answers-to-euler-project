@@ -107,21 +107,11 @@ numbers.
 
 -}
 module PE0013
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , fiftyDigits
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 13
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Large sum"
 
 -- | Gives the solution to the current problem.
 solution :: String

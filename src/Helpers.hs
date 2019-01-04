@@ -5,8 +5,11 @@ module Helpers
 , primeIncrements
 , minus
 , properDivisors
+, parallelize
 ) where
 
+import Control.Parallel.Strategies (using, rdeepseq, parListChunk)
+import Control.DeepSeq (NFData)
 import Data.Sort (uniqueSort)
 
 -- | First prime numbers are 2, 3, 5, 7, 11, 13 and 17.
@@ -95,3 +98,6 @@ properDivisors = (1:)
 
         start [] = []
         start xs = init xs
+
+parallelize :: NFData a => [a] -> [a]
+parallelize = (`using` parListChunk 64 rdeepseq)

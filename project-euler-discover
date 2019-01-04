@@ -34,7 +34,9 @@ function list_problems() {
 
     ls $lsoptions -1 src/PE????.hs | head $headoptions | while read problem
     do
-        echo "$(basename $problem .hs)"
+        title=$(cat "$problem" \
+            | grep --perl-regexp --max-count=1 --only-matching '(?<={- \| ).*' )
+        printf "%s\t%s\n" "$(basename $problem .hs)" "$title"
     done
 }
 
@@ -42,7 +44,7 @@ function list_problems() {
 function generate_imports() {
     # Generates all imports.
     echo
-    list_problems | sed 's/^/import /'
+    list_problems | cut --fields=1 | sed 's/^/import /'
 }
 
 # Solution code generation.
@@ -52,7 +54,7 @@ function generate_solutions() {
     echo 'problems :: [(Integer, String, String)]'
     echo 'problems ='
     list_problems \
-        | sed 's/\(.*\)/(\1.problemID, \1.problemTitle, show \1.solution)/' \
+        | sed 's/^PE\(....\)\t\(.*\)/(\1, "\2", show PE\1.solution)/' \
         | sed -e '1 s/^/    [ /' -e '2,10000 s/^/    , /'
     echo '    ]'
     echo

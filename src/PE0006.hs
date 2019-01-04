@@ -14,23 +14,13 @@ Find the difference between the sum of the squares of the first one hundred
 natural numbers and the square of the sum.
 -}
 module PE0006
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , sumOfSquares
 , squareOfSum
 , sumSquareDifference
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 6
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Sum square difference"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

@@ -31,9 +31,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 down, left, right, or diagonally) in the 20×20 grid?
 -}
 module PE0011
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , diagonals
@@ -46,14 +44,6 @@ module PE0011
 
 import Data.List (transpose)
 import Data.List.Split (splitOn)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 11
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Largest product in a grid"
 
 -- | Gives the solution to the current problem.
 solution :: Int

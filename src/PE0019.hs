@@ -18,9 +18,7 @@ How many Sundays fell on the first of the month during the twentieth century
 (1 Jan 1901 to 31 Dec 2000)?
 -}
 module PE0019
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , LeapYear (Leap, NotLeap)
@@ -35,14 +33,6 @@ module PE0019
 , countFirstDayInMonth
 , monthFirstDays
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 19
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Counting Sundays"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

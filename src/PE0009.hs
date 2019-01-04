@@ -11,9 +11,7 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 -}
 module PE0009
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , Triplet (Triplet)
@@ -23,14 +21,6 @@ module PE0009
 ) where
 
 import Data.List (find)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 9
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Special Pythagorean triplet"
 
 -- | Gives the solution to the current problem.
 solution :: Maybe Integer

@@ -8,9 +8,7 @@ What is the smallest positive number that is evenly divisible by all of the
 numbers from 1 to 20?
 -}
 module PE0005
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , divisibleByAll
@@ -20,14 +18,6 @@ module PE0005
 import Data.List (find, (\\))
 import Data.Maybe (fromMaybe)
 import Helpers (primes)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 5
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Smallest multiple"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

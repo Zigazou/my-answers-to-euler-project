@@ -27,6 +27,8 @@ dependencies:
 - containers
 - mtl
 - criterion-measurement
+- parallel
+- deepseq
 
 library:
   source-dirs: src

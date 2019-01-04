@@ -1,5 +1,4 @@
 {-# LANGUAGE TupleSections #-}
-
 {- | Largest palindrome product
 Problem 4
 
@@ -9,9 +8,7 @@ the product of two 2-digit numbers is 9009 = 91 × 99.
 Find the largest palindrome made from the product of two 3-digit numbers.
 -}
 module PE0004
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , isPalindromic
@@ -26,14 +23,6 @@ module PE0004
 
 import Control.Monad (liftM2)
 import Data.List (find)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 4
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Largest palindrome product"
 
 -- | Gives the solution to the current problem.
 solution :: (Integral a, Show a) => Maybe a

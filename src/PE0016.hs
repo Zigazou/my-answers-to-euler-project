@@ -8,22 +8,12 @@ Problem 16
 What is the sum of the digits of the number 2    ?
 -}
 module PE0016
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 ) where
 
 import Data.Char (digitToInt)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 16
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Power digit sum"
 
 -- | Gives the solution to the current problem.
 solution :: Int

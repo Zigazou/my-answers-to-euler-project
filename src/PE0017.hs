@@ -13,9 +13,7 @@ letters. The use of "and" when writing out numbers is in compliance with British
 usage.
 -}
 module PE0017
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , Flavour (British, American)
@@ -27,14 +25,6 @@ module PE0017
 import Data.Char (digitToInt, isLetter)
 import Data.Maybe (fromMaybe)
 import Data.List (find)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 17
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Number letter counts"
 
 -- | Gives the solution to the current problem.
 solution :: Int

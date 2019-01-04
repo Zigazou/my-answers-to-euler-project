@@ -13,9 +13,7 @@ and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and
 Evaluate the sum of all the amicable numbers under 10000.
 -}
 module PE0021
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , amicableNumbers
@@ -24,14 +22,6 @@ module PE0021
 ) where
 
 import Helpers (properDivisors)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 21
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Amicable numbers"
 
 -- | Gives the solution to the current problem.
 solution :: Int

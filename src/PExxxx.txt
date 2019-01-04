@@ -4,20 +4,10 @@ Problem NUMBER
 Description
 -}
 module PE0000
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = NUMBER
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "TITLE"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

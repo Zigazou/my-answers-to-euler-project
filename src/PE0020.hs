@@ -9,22 +9,12 @@ and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 Find the sum of the digits in the number 100!
 -}
 module PE0020
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 ) where
 
 import Data.Char (digitToInt)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 20
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Factorial digit sum"
 
 -- | Gives the solution to the current problem.
 solution :: Integer

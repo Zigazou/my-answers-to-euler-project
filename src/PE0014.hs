@@ -18,9 +18,7 @@ Which starting number, under one million, produces the longest chain?
 NOTE: Once the chain starts the terms are allowed to go above one million.
 -}
 module PE0014
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , collatzSequence
@@ -33,14 +31,6 @@ import Control.Monad.State.Lazy (StateT, get, put, runState)
 import qualified Data.Map as Map
 import Data.List (maximumBy)
 import Data.Ord (comparing)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 14
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Longest Collatz sequence"
 
 -- | Gives the solution to the current problem.
 solution :: Int

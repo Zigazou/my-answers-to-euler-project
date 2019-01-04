@@ -30,9 +30,7 @@ Find the thirteen adjacent digits in the 1000-digit number that have the
 greatest product. What is the value of this product?
 -}
 module PE0008
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , oneThousandDigits
@@ -45,14 +43,6 @@ module PE0008
 import qualified Data.Text as T
 import Data.Text (Text)
 import Data.Char (digitToInt)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 8
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Largest product in a series"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

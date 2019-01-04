@@ -7,23 +7,13 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 1000.
 -}
 module PE0001
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , multiplesOf
 , union
 , sumMultiplesOf
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 1
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Multiples of 3 and 5"
 
 -- | Gives the solution to the current problem.
 solution :: (Ord a, Num a, Show a) => a

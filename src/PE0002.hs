@@ -10,22 +10,12 @@ By considering the terms in the Fibonacci sequence whose values do not exceed
 four million, find the sum of the even-valued terms.
 -}
 module PE0002
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , fibonacci
 , sumFibonacci
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 2
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Even Fibonacci numbers"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

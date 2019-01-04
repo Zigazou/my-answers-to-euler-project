@@ -12,21 +12,11 @@ the right and down, there are exactly 6 routes to the bottom right corner.
 How many such routes are there through a 20×20 grid?
 -}
 module PE0015
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , combinations
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 15
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Lattice paths"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a

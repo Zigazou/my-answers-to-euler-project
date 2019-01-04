@@ -35,9 +35,7 @@ containing one-hundred rows; it cannot be solved by brute force, and requires a
 clever method! ;o)
 -}
 module PE0018
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , triangle
@@ -47,14 +45,6 @@ module PE0018
 , prepareTriangle
 , maxPathRow
 ) where
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 18
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Maximum path sum I"
 
 -- | Gives the solution to the current problem.
 solution :: Int

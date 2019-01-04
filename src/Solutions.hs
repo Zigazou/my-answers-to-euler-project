@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -F -pgmF ./project-euler-discover-last #-}
+{-# OPTIONS_GHC -F -pgmF ./project-euler-discover #-}
 module Solutions (solutions) where
 
 import Criterion.Measurement (initializeTime, getTime)

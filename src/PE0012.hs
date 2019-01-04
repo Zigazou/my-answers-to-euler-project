@@ -23,9 +23,7 @@ What is the value of the first triangle number to have over five hundred
 divisors?
 -}
 module PE0012
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , triangleNumber
@@ -39,16 +37,8 @@ module PE0012
 import Data.List (find, nub)
 import Helpers (primes)
 
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 12
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Highly divisible triangular number"
-
 -- | Gives the solution to the current problem.
-solution :: Integral a => Maybe a
+solution :: Maybe Int
 solution = findMinDivisors 500
 
 -- Functions

@@ -13,9 +13,7 @@ obtain a score of 938 × 53 = 49714.
 What is the total of all the name scores in the file?
 -}
 module PE0022
-( problemID
-, problemTitle
-, solution
+( solution
 
 -- For testing purposes
 , alphabeticalValue
@@ -24,14 +22,6 @@ module PE0022
 
 import Data.Sort (sort)
 import Data.Char (ord)
-
--- | ID of the Euler problem.
-problemID :: Integer
-problemID = 22
-
--- | Title of the Euler problem.
-problemTitle :: String
-problemTitle = "Names scores"
 
 -- | Gives the solution to the current problem.
 solution :: Integral a => a
